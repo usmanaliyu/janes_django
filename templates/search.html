@@ -8,7 +8,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p>
-                <h1 class="mb-0 bread">Shop</h1>
+                <h1 class="mb-0 bread">Search results for "{{ search_term}}"</h1>
 
                 <div class="panel-heading" role="tab" id="headingOne">
                     <form action="/search" method="GET">
@@ -27,7 +27,7 @@
             <div class="col-md-8 col-lg-10 order-md-last">
                 <div class="row">
 
-                    {% for item in object_list %}
+                    {% for item in instance %}
                     <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
                         <div class="product">
                             <a href="{{ item.get_absolute_url }}" class="img-prod"><img class="img-fluid"
@@ -63,7 +63,11 @@
                             </div>
                         </div>
                     </div>
+                    {% empty %}
+                    <p align="center">Results for "{{ search_term }}" not available</p>
                     {% endfor %}
+
+
 
 
                 </div>
@@ -90,12 +94,11 @@
                         <h2 class="heading">Categories</h2>
                         <div class="fancy-collapse-panel">
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                                {% for item in category_list %}
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title">
-                                            <a href="{{ item.category_list.get_absolute_url }}">{{ item.name }}
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">Men's Shoes
                                             </a>
                                         </h4>
                                     </div>
@@ -104,14 +107,82 @@
                                         <div class="panel-body">
                                             <ul>
                                                 <li><a href="#">Sport</a></li>
-
+                                                <li><a href="#">Casual</a></li>
+                                                <li><a href="#">Running</a></li>
+                                                <li><a href="#">Jordan</a></li>
+                                                <li><a href="#">Soccer</a></li>
+                                                <li><a href="#">Football</a></li>
+                                                <li><a href="#">Lifestyle</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                {% endfor %}
-
-
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                href="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">Women's Shoes
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                        aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Sport</a></li>
+                                                <li><a href="#">Casual</a></li>
+                                                <li><a href="#">Running</a></li>
+                                                <li><a href="#">Jordan</a></li>
+                                                <li><a href="#">Soccer</a></li>
+                                                <li><a href="#">Football</a></li>
+                                                <li><a href="#">Lifestyle</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                href="#collapseThree" aria-expanded="false"
+                                                aria-controls="collapseThree">Accessories
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                        aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Jeans</a></li>
+                                                <li><a href="#">T-Shirt</a></li>
+                                                <li><a href="#">Jacket</a></li>
+                                                <li><a href="#">Shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                href="#collapseFour" aria-expanded="false"
+                                                aria-controls="collapseThree">Clothing
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                                        aria-labelledby="headingFour">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Jeans</a></li>
+                                                <li><a href="#">T-Shirt</a></li>
+                                                <li><a href="#">Jacket</a></li>
+                                                <li><a href="#">Shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

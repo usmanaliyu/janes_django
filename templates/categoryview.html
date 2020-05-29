@@ -8,7 +8,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p>
-                <h1 class="mb-0 bread">Shop</h1>
+                <h1 class="mb-0 bread">{{ category.name }}</h1>
 
                 <div class="panel-heading" role="tab" id="headingOne">
                     <form action="/search" method="GET">
@@ -27,7 +27,7 @@
             <div class="col-md-8 col-lg-10 order-md-last">
                 <div class="row">
 
-                    {% for item in object_list %}
+                    {% for item in instance %}
                     <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
                         <div class="product">
                             <a href="{{ item.get_absolute_url }}" class="img-prod"><img class="img-fluid"
@@ -87,7 +87,7 @@
             <div class="col-md-4 col-lg-2">
                 <div class="sidebar">
                     <div class="sidebar-box-2">
-                        <h2 class="heading">Categories</h2>
+
                         <div class="fancy-collapse-panel">
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
@@ -95,7 +95,8 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title">
-                                            <a href="{{ item.category_list.get_absolute_url }}">{{ item.name }}
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">{{ item.name }}
                                             </a>
                                         </h4>
                                     </div>

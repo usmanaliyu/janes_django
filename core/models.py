@@ -23,6 +23,21 @@ ADDRESS_CHOICES = (
     ('S', 'Shipping'),
 )
 
+class Category(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+    slug = models.SlugField(max_length=250)
+
+    class Meta:
+        ordering =['name']
+        verbose_name = 'category'
+
+    def get_absolute_url(self):
+        return reverse('category_list', args=[self.slug])
+
+    def __str__(self):
+        return self.name
+
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -38,7 +53,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE, default=1,)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()

@@ -8,7 +8,8 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, Category
+from django.db.models import Q
 
 import random
 import string
@@ -349,11 +350,14 @@ class HomeView(ListView):
     template_name = "home.html"
 
 
-class ShopView(ListView):
-    model = Item
-    paginate_by = 10
-    template_name = "shop.html"
-
+def ShopView(request):
+    object_list = Item.objects.all()
+    category_list = Category.objects.all()
+    content = {
+        'object_list':object_list,
+        'category_list':category_list
+    }
+    return render(request,'shop.html',content)
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -521,3 +525,30 @@ class RequestRefundView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order does not exist.")
                 return redirect("core:request-refund")
+
+def Search(request):
+    if request.GET:
+        search_term = request.GET['search_term']
+        search_result =Item.objects.filter(
+            Q(title__icontains=search_term)
+        )
+        context = {
+            'search_term':search_term,
+            'instance':search_result
+            }
+        return render(request,'search.html', context)
+    else:
+        return redirect('/')
+
+def CategoryView(request,category_slug):
+    instance = Item.objects.all()
+    categories = Category.objects.all()
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        instance_list = instance.filter(category=category)
+    content = {
+        'categories':categories,
+        'instance':instance,
+        'category':category
+    }
+    return render(request,'categoryview.html',content)
