@@ -47,9 +47,10 @@
             <div class="form-group">
                 {% for value, name in form.fields.payment_option.choices %}
                 <div class="col-md-12">
-                    <div class="radio">
-                        <label for="{{ name }}"> <input id="{{ name }}" name="payment_option" value="{{ value }}"
-                                type="radio" class="custom-control-input" required>{{ name }}</label>
+                    <div class="radio ">
+
+                        <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" required>
+                        <label for="{{ name }}" required>{{ name }}</label>
                     </div>
                 </div>
                 {% endfor %}

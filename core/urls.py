@@ -12,7 +12,9 @@ from .views import (
     RequestRefundView,
     ShopView,
     Search,
-    CategoryView
+    CategoryView,
+    AboutView,
+    ContactView
 )
 
 app_name = 'core'
@@ -32,4 +34,6 @@ urlpatterns = [
     path('request-refund/', RequestRefundView.as_view(), name='request-refund'),
     path('search/', Search, name='search'),
     path('category/<str:category_slug>/', CategoryView, name='categoryview'),
+    path('about/', AboutView, name='about'),
+    path('contact/', ContactView, name='contact')
 ]

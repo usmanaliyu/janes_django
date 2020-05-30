@@ -552,3 +552,10 @@ def CategoryView(request,category_slug):
         'category':category
     }
     return render(request,'categoryview.html',content)
+
+def AboutView(request):
+    return render(request, 'about.html')
+
+def ContactView(request):
+    return render(request, 'contact.html')
+
