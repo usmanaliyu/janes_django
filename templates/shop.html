@@ -51,15 +51,16 @@
                                 </div>
                                 <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
                                 <div class="pricing">
-                                    <p class="price"><span>${{ item.price }}</span></p>
+                                    <p class="price"><span>{% if item.discount_price %}
+                                            ${{ item.discount_price }}
+                                            {% else %}
+                                            ${{ item.price }}
+                                            {% endif %}</span>
+                                    </p>
+
                                 </div>
-                                <p class="bottom-area d-flex px-3">
-                                    <a href="{{ object.get_add_to_cart_url }}"
-                                        class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-                                                class="ion-ios-add ml-1"></i></span></a>
-                                    <a href="#" class="buy-now text-center py-2">Buy now<span><i
-                                                class="ion-ios-cart ml-1"></i></span></a>
-                                </p>
+
+
                             </div>
                         </div>
                     </div>
@@ -67,21 +68,26 @@
 
 
                 </div>
+
+                {% if is_paginated %}
                 <div class="row mt-5">
                     <div class="col text-center">
                         <div class="block-27">
                             <ul>
-                                <li><a href="#">&lt;</a></li>
-                                <li class="active"><span>1</span></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&gt;</a></li>
+
+                                {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                                {% endif %}
+                                <li class="active"><a
+                                        href="?page={{ page_obj.number }}"><span>{{ page_obj.number }}</span></a></li>
+                                {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
 
             <div class="col-md-4 col-lg-2">

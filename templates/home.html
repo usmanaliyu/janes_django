@@ -82,18 +82,14 @@
             <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
             <div class="pricing">
               <p class="price"><span>{% if item.discount_price %}
-                  {{ item.discount_price }}
+                  ${{ item.discount_price }}
                   {% else %}
-                  {{ item.price }}
+                  ${{ item.price }}
                   {% endif %}</span>
               </p>
 
             </div>
-            <p class="bottom-area d-flex px-3">
-              <a href="{{ object.get_add_to_cart_url }}" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-                    class="ion-ios-add ml-1"></i></span></a>
-              <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
-            </p>
+
           </div>
         </div>
       </div>
